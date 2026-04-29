@@ -1,0 +1,38 @@
+---
+import { publications } from "../data/publications";
+---
+
+<section id="publications" class="border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] pt-10 mt-16">
+  <h2 class="text-base font-semibold tracking-tight">Publications &amp; writing</h2>
+
+  <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+    {
+      publications.map((pub) => (
+        <li class="grid grid-cols-[60px_1fr] gap-4 py-4 first:pt-0">
+          <span class="tabular-nums text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] pt-0.5">
+            {pub.year}
+          </span>
+          <div class="min-w-0">
+            <p class="leading-[1.5] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+              {pub.url ? (
+                <a
+                  href={pub.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+                >
+                  {pub.title}
+                </a>
+              ) : (
+                pub.title
+              )}
+            </p>
+            <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {pub.authors} · <span class="italic">{pub.venue}</span>
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

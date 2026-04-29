@@ -1,0 +1,25 @@
+---
+import { selectedWork } from "../data/selectedWork";
+---
+
+<section id="work" class="border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] pt-10 mt-16">
+  <h2 class="text-base font-semibold tracking-tight">Selected work</h2>
+
+  <div class="mt-4 grid gap-4">
+    {
+      selectedWork.map((item) => (
+        <a
+          href={item.url || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block rounded-lg border border-[var(--color-border)] dark:border-[var(--color-border-dark)] p-5 hover:border-[var(--color-accent)] dark:hover:border-[var(--color-accent-dark)] transition-colors"
+        >
+          <h3 class="font-semibold text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">{item.title}</h3>
+          <p class="mt-2 text-sm leading-[1.55] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            {item.summary}
+          </p>
+        </a>
+      ))
+    }
+  </div>
+</section>

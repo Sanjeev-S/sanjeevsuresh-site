@@ -1,0 +1,12 @@
+{
+  "recurse": true,
+  "concurrency": 8,
+  "skip": [
+    "^https?://(www\\.)?linkedin\\.com",
+    "^https?://(www\\.)?sanjeevsuresh\\.com"
+  ],
+  "linksToSkip": [
+    "^https?://(www\\.)?linkedin\\.com",
+    "^https?://(www\\.)?sanjeevsuresh\\.com"
+  ]
+}
