@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import headshot from "../assets/headshot.jpg";
 import { site } from "../data/site";
 ---
 
@@ -47,14 +45,13 @@ import { site } from "../data/site";
     </div>
 
     <div class="shrink-0">
-      <Image
-        src={headshot}
+      <img
+        src="/headshot.jpg"
         alt={`Portrait of ${site.name}`}
-        width={120}
-        height={120}
-        densities={[1, 2]}
-        quality={90}
+        width="120"
+        height="120"
         loading="eager"
+        decoding="async"
         class="rounded-full size-[120px] object-cover border border-[var(--color-border)] dark:border-[var(--color-border-dark)]"
       />
     </div>
