@@ -8,9 +8,9 @@ import { service } from "../data/service";
   <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
     {
       service.map((entry) => (
-        <li class="grid grid-cols-[84px_1fr] gap-4 py-4 first:pt-0">
+        <li class="grid grid-cols-[60px_1fr] gap-4 py-4 first:pt-0">
           <span class="tabular-nums text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] pt-0.5">
-            {entry.date}
+            {entry.year}
           </span>
           <div class="min-w-0">
             <p class="leading-[1.5] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
