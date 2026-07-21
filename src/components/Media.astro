@@ -1,0 +1,35 @@
+---
+import { media } from "../data/media";
+---
+
+<section id="media" class="border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] pt-10 mt-16">
+  <h2 class="text-base font-semibold tracking-tight">Media</h2>
+
+  <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+    {
+      media.map((item) => (
+        <li class="grid grid-cols-[84px_1fr] gap-4 py-4 first:pt-0">
+          <span class="tabular-nums text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] pt-0.5">
+            {item.date}
+          </span>
+          <div class="min-w-0">
+            <p class="leading-[1.5] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+              >
+                {item.title}
+              </a>
+            </p>
+            <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+              {item.show}
+              {item.detail && <> · {item.detail}</>}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

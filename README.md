@@ -31,9 +31,9 @@ Typed arrays — edit these to update the site:
 
 - `publications.ts` — academic-style citation list
 - `selectedWork.ts` — featured projects/contributions
+- `service.ts` — recognition & service (ambassador roles, program committees)
+- `media.ts` — podcast and other media appearances
 - `talks.ts` — speaking engagements (empty until first entry)
-- `judging.ts` — hackathons judged, papers reviewed
-- `press.ts` — external coverage
 - `site.ts` — name, role, taglines, links — single source of truth for hero/JSON-LD
 
 ## Replace the placeholder headshot

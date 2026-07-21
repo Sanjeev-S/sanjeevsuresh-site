@@ -6,9 +6,9 @@ test.describe("homepage smoke", () => {
     await expect(page.locator("h1").first()).toContainText("Sanjeev Suresh");
   });
 
-  test("publication list has 5 entries", async ({ page }) => {
+  test("publication list has 6 entries", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("#publications ul > li")).toHaveCount(5);
+    await expect(page.locator("#publications ul > li")).toHaveCount(6);
   });
 
   test("head has canonical, og:title, og:image, and schema.org Person", async ({ page }) => {
