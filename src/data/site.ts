@@ -5,7 +5,7 @@ export const site = {
   jobTitle: "Senior Machine Learning Engineer",
   employer: "Uber",
   team: "Next Personalization",
-  tagline: "I build real-time ML and open, vendor-neutral AI.",
+  tagline: "I like to build large-scale ML systems and AI that belongs to everyone.",
   description:
     "Senior ML Engineer at Uber on the Next Personalization team — ranking and personalization for Mobility and Delivery.",
   links: {
