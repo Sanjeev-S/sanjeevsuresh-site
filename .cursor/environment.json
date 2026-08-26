@@ -1,0 +1,10 @@
+{
+  "name": "sanjeevsuresh-site",
+  "install": "curl -fsSL https://bun.sh/install | bash && export PATH=\"$HOME/.bun/bin:$PATH\" && bun install --frozen-lockfile && bunx playwright install --with-deps chromium",
+  "terminals": [
+    {
+      "name": "dev",
+      "command": "export PATH=\"$HOME/.bun/bin:$PATH\" && bun run dev"
+    }
+  ]
+}
