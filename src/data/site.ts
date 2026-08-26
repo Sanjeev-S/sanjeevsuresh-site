@@ -2,12 +2,12 @@ export const site = {
   name: "Sanjeev Suresh",
   url: "https://sanjeevsuresh.com",
   email: "hello@sanjeevsuresh.com",
-  jobTitle: "Senior Machine Learning Engineer",
+  jobTitle: "Staff Machine Learning Engineer",
   employer: "Uber",
   team: "Next Personalization",
   tagline: "I like to build large-scale ML systems and AI that belongs to everyone.",
   description:
-    "Senior ML Engineer at Uber on the Next Personalization team — ranking and personalization for Mobility and Delivery.",
+    "Staff ML Engineer at Uber on the Next Personalization team — ranking and personalization for Mobility and Delivery.",
   links: {
     linkedin: "https://www.linkedin.com/in/sanjeevsuresh/",
     github: "https://github.com/Sanjeev-S",

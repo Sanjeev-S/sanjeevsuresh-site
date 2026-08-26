@@ -1,6 +1,6 @@
 # sanjeevsuresh.com
 
-Personal site for Sanjeev Suresh — Senior ML Engineer at Uber.
+Personal site for Sanjeev Suresh — Staff ML Engineer at Uber.
 
 Static site built with Astro 6 and Tailwind v4. Deployed to Cloudflare Pages.
 
