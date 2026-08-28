@@ -1,23 +1,9 @@
 ---
 import { events } from "../data/events";
-
-type Props = {
-  /** When true, only show date + linked title (no role/city). */
-  bare?: boolean;
-  /** Optional one-line intro under the heading. */
-  intro?: string;
-};
-
-const { bare = false, intro } = Astro.props;
 ---
 
 <section id="events" class="border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] pt-10 mt-16">
   <h2 class="text-base font-semibold tracking-tight">Events</h2>
-  {
-    intro && (
-      <p class="mt-2 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">{intro}</p>
-    )
-  }
 
   <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
     {
@@ -37,13 +23,6 @@ const { bare = false, intro } = Astro.props;
                 {entry.title}
               </a>
             </p>
-            {
-              !bare && (
-                <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-                  {entry.role} · {entry.city}
-                </p>
-              )
-            }
           </div>
         </li>
       ))
