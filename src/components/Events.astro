@@ -1,0 +1,31 @@
+---
+import { events } from "../data/events";
+---
+
+<section id="events" class="border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] pt-10 mt-16">
+  <h2 class="text-base font-semibold tracking-tight">Events</h2>
+
+  <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+    {
+      events.map((entry) => (
+        <li class="grid grid-cols-[72px_1fr] gap-4 py-4 first:pt-0">
+          <span class="tabular-nums text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] pt-0.5">
+            {entry.month} {entry.year}
+          </span>
+          <div class="min-w-0">
+            <p class="leading-[1.5] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+              <a
+                href={entry.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+              >
+                {entry.title}
+              </a>
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
