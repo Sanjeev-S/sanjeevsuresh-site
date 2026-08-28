@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Hero from "../../components/Hero.astro";
+import About from "../../components/About.astro";
+import SelectedWork from "../../components/SelectedWork.astro";
+import RecognitionService from "../../components/RecognitionService.astro";
+import Events from "../../components/Events.astro";
+import Media from "../../components/Media.astro";
+import Publications from "../../components/Publications.astro";
+---
+
+<Layout title="Homepage prototype (title-only Events) · Sanjeev Suresh" description="Homepage with bare Events section.">
+  <p class="pt-8 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+    Prototype — title-only Events (no Co-host / city).
+    <a
+      href="/prototypes/events"
+      class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+      >Compare variants</a
+    >.
+  </p>
+  <Hero />
+  <About />
+  <SelectedWork />
+  <RecognitionService />
+  <Events bare />
+  <Media />
+  <Publications />
+</Layout>
