@@ -1,0 +1,175 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const events = [
+  {
+    month: "Aug",
+    year: 2026,
+    title: "Enterprise MCP Lightning Talks",
+    venue: "Workato AI Hub",
+    city: "San Francisco",
+    url: "https://luma.com/w3ckeuj7",
+    note: "In collaboration with Agentic AI Foundation",
+  },
+  {
+    month: "Jul",
+    year: 2026,
+    title: "MCP Graduation Party",
+    venue: "Arcade.dev & partners",
+    city: "San Francisco",
+    url: "https://luma.com/ugfl1mn2",
+    note: "MCP 2026-07-28 spec graduation",
+  },
+] as const;
+
+const linkClass =
+  "hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors";
+const muted = "text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
+const border = "border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)]";
+---
+
+<Layout title="Events prototypes · Sanjeev Suresh" description="Layout prototypes for an Events section.">
+  <section class="pt-12 sm:pt-16">
+    <p class={muted}>Prototype page — not linked from the homepage</p>
+    <h1 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">Events section prototypes</h1>
+    <p class="mt-2 text-[var(--color-fg)] dark:text-[var(--color-fg-dark)] leading-[1.55]">
+      Same two events, four treatments. Pick a layout + credit language, then we ship one to the homepage.
+    </p>
+  </section>
+
+  <!-- A: Match existing list pattern, role-first -->
+  <section id="proto-a" class={`${border} pt-10 mt-16`}>
+    <p class={`${muted} uppercase tracking-wide text-xs`}>Variant A · Match Recognition / Media</p>
+    <h2 class="mt-1 text-base font-semibold tracking-tight">Events</h2>
+    <p class={`mt-2 ${muted}`}>Role first. Closest to what’s already on the site.</p>
+
+    <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+      {
+        events.map((e) => (
+          <li class="grid grid-cols-[72px_1fr] gap-4 py-4 first:pt-0">
+            <span class={`tabular-nums ${muted} pt-0.5`}>
+              {e.month} {e.year}
+            </span>
+            <div class="min-w-0">
+              <p class="leading-[1.5]">
+                <a href={e.url} target="_blank" rel="noopener noreferrer" class={linkClass}>
+                  Co-organizer — {e.title}
+                </a>
+              </p>
+              <p class={`mt-1 ${muted}`}>
+                {e.venue} · {e.city}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- B: Event title first, credit on second line -->
+  <section id="proto-b" class={`${border} pt-10 mt-16`}>
+    <p class={`${muted} uppercase tracking-wide text-xs`}>Variant B · Event-first</p>
+    <h2 class="mt-1 text-base font-semibold tracking-tight">Events</h2>
+    <p class={`mt-2 ${muted}`}>Title is the headline; your role is secondary. Reads more like a portfolio of nights.</p>
+
+    <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+      {
+        events.map((e) => (
+          <li class="grid grid-cols-[72px_1fr] gap-4 py-4 first:pt-0">
+            <span class={`tabular-nums ${muted} pt-0.5`}>
+              {e.month} {e.year}
+            </span>
+            <div class="min-w-0">
+              <p class="leading-[1.5]">
+                <a href={e.url} target="_blank" rel="noopener noreferrer" class={linkClass}>
+                  {e.title}
+                </a>
+              </p>
+              <p class={`mt-1 ${muted}`}>
+                Co-organizer · {e.city}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- C: Softer credit + optional note -->
+  <section id="proto-c" class={`${border} pt-10 mt-16`}>
+    <p class={`${muted} uppercase tracking-wide text-xs`}>Variant C · Softer credit + note</p>
+    <h2 class="mt-1 text-base font-semibold tracking-tight">Events</h2>
+    <p class={`mt-2 ${muted}`}>
+      “Helped organize” hedges host credit. Extra note line for collaboration / context.
+    </p>
+
+    <ul class="mt-4 divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+      {
+        events.map((e) => (
+          <li class="grid grid-cols-[72px_1fr] gap-4 py-4 first:pt-0">
+            <span class={`tabular-nums ${muted} pt-0.5`}>
+              {e.month} {e.year}
+            </span>
+            <div class="min-w-0">
+              <p class="leading-[1.5]">
+                <a href={e.url} target="_blank" rel="noopener noreferrer" class={linkClass}>
+                  {e.title}
+                </a>
+              </p>
+              <p class={`mt-1 ${muted}`}>Helped organize · {e.venue}</p>
+              <p class={`mt-0.5 ${muted}`}>{e.note}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- D: Compact single-line credit variants for comparison -->
+  <section id="proto-d" class={`${border} pt-10 mt-16`}>
+    <p class={`${muted} uppercase tracking-wide text-xs`}>Variant D · Credit language shootout</p>
+    <h2 class="mt-1 text-base font-semibold tracking-tight">Events</h2>
+    <p class={`mt-2 ${muted}`}>
+      Same layout as B; only the role word changes. Skim which verb feels right.
+    </p>
+
+    <ul class="mt-6 space-y-8">
+      {
+        (["Co-organizer", "Organizer", "Host", "Helped organize"] as const).map((role) => (
+          <li>
+            <p class={`${muted} text-xs uppercase tracking-wide mb-3`}>{role}</p>
+            <ul class="divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+              {events.map((e) => (
+                <li class="grid grid-cols-[72px_1fr] gap-4 py-4 first:pt-0">
+                  <span class={`tabular-nums ${muted} pt-0.5`}>
+                    {e.month} {e.year}
+                  </span>
+                  <div class="min-w-0">
+                    <p class="leading-[1.5]">
+                      <a href={e.url} target="_blank" rel="noopener noreferrer" class={linkClass}>
+                        {e.title}
+                      </a>
+                    </p>
+                    <p class={`mt-1 ${muted}`}>
+                      {role} · {e.city}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class={`${border} pt-10 mt-16`}>
+    <h2 class="text-base font-semibold tracking-tight">Open questions while you look</h2>
+    <ul class={`mt-4 space-y-2 ${muted} list-disc pl-5`}>
+      <li>Month column is wider (`72px`) than Recognition’s year column so “Aug 2026” fits.</li>
+      <li>Enterprise MCP date assumed <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">Aug 2026</strong> (Luma / Workato lineup for Aug 13). Correct if wrong.</li>
+      <li>MCP Graduation Party assumed <strong class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">Jul 2026</strong> (Jul 28).</li>
+      <li>No cards, no attendee counts — keeps pace with Media / Recognition.</li>
+    </ul>
+  </section>
+</Layout>
