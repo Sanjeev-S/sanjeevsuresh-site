@@ -24,13 +24,13 @@ const active = onDark ? "text-white" : "text-[var(--color-fg)] dark:text-[var(--
   <span>
     Prototype <span class={`font-semibold ${active}`}>{current.toUpperCase()} — {name}</span>
   </span>
-  <span class="ml-auto flex gap-3">
+  <span class="ml-auto flex gap-1">
     {
       all.map((id) => (
         <a
           href={`/prototypes/portrait/${id}`}
           aria-current={id === current ? "page" : undefined}
-          class={`hover:underline underline-offset-4 ${id === current ? `font-semibold ${active}` : ""}`}
+          class={`inline-flex min-w-6 min-h-6 items-center justify-center hover:underline underline-offset-4 ${id === current ? `font-semibold ${active}` : ""}`}
         >
           {id.toUpperCase()}
         </a>
