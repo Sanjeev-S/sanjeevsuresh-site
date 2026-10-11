@@ -6,6 +6,29 @@ test.describe("homepage smoke", () => {
     await expect(page.locator("h1").first()).toContainText("Sanjeev Suresh");
   });
 
+  test("hero shows the portrait as a responsive image", async ({ page }) => {
+    await page.goto("/");
+    const img = page.locator('aside picture img[alt="Portrait of Sanjeev Suresh"]');
+    await expect(img).toBeVisible();
+    await expect(page.locator('aside picture source[type="image/avif"]')).toHaveCount(1);
+    await expect(page.locator('aside picture source[type="image/webp"]')).toHaveCount(1);
+    expect(await img.getAttribute("srcset")).toContain("w,");
+  });
+
+  test("sidebar sits beside content on desktop and stacks on mobile", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+    const aside = await page.locator("aside").boundingBox();
+    const main = await page.locator("main").boundingBox();
+    expect(aside && main && aside.x + aside.width <= main.x).toBeTruthy();
+    expect(aside && main && Math.abs(aside.y - main.y) < 2).toBeTruthy();
+
+    await page.setViewportSize({ width: 375, height: 800 });
+    const asideM = await page.locator("aside").boundingBox();
+    const mainM = await page.locator("main").boundingBox();
+    expect(asideM && mainM && asideM.y + asideM.height <= mainM.y).toBeTruthy();
+  });
+
   test("publication list has 6 entries", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator("#publications ul > li")).toHaveCount(6);

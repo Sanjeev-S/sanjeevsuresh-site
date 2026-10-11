@@ -36,9 +36,9 @@ Typed arrays — edit these to update the site:
 - `talks.ts` — speaking engagements (empty until first entry)
 - `site.ts` — name, role, taglines, links — single source of truth for hero/JSON-LD
 
-## Replace the placeholder headshot
+## Portrait
 
-`src/assets/headshot.jpg` is a 400×400 grey placeholder. Drop the real photo at the same path (square crop, ≥400×400 JPEG or WebP) and Astro's image pipeline will generate AVIF + WebP derivatives at build time.
+`src/assets/portrait.jpg` (1500×2000, 3:4) is the photo used in the sidebar and as the schema.org `Person.image`. To swap it, replace the file at the same path with another portrait-orientation JPEG or WebP; Astro's image pipeline generates AVIF + WebP derivatives and a responsive `srcset` at build time.
 
 ## OpenGraph image
 

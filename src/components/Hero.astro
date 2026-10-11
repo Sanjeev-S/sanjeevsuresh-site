@@ -1,59 +1,62 @@
 ---
+import { Picture } from "astro:assets";
+import portrait from "../assets/portrait.jpg";
 import { site } from "../data/site";
+
+const handle = (url: string) => new URL(url).pathname.replace(/^\/|\/$/g, "");
+
+const links = [
+  { label: "Email", href: `mailto:${site.email}`, external: false, meta: site.email },
+  { label: "LinkedIn", href: site.links.linkedin, external: true, meta: handle(site.links.linkedin) },
+  { label: "GitHub", href: site.links.github, external: true, meta: handle(site.links.github) },
+];
+
+const muted = "text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
 ---
 
-<section class="pt-12 sm:pt-16">
-  <div class="flex flex-col-reverse sm:flex-row sm:items-center gap-6 sm:gap-8">
-    <div class="flex-1 min-w-0">
-      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+<aside class="lg:sticky lg:top-12 lg:self-start">
+  <div class="flex items-center gap-5 sm:gap-6 lg:block">
+    <Picture
+      src={portrait}
+      formats={["avif", "webp"]}
+      widths={[240, 320, 480, 600]}
+      sizes="(min-width: 1280px) 300px, (min-width: 1024px) 280px, (min-width: 640px) 140px, 112px"
+      alt={`Portrait of ${site.name}`}
+      loading="eager"
+      fetchpriority="high"
+      pictureAttributes={{ class: "shrink-0" }}
+      class="w-[112px] sm:w-[140px] lg:w-full h-auto aspect-[4/5] object-cover object-[50%_20%] rounded-2xl ring-1 ring-black/5 dark:ring-white/10"
+    />
+    <div class="min-w-0 lg:mt-7">
+      <h1 class="text-2xl sm:text-3xl lg:text-[1.75rem] font-semibold tracking-tight leading-[1.1] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
         {site.name}
       </h1>
-      <p class="mt-2 text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
-        {site.jobTitle} at {site.employer}
+      <p class="mt-2 text-sm sm:text-[15px] leading-snug text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+        {site.jobTitle}
       </p>
-      <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
-        {site.tagline}
-      </p>
-
-      <ul class="mt-5 flex flex-wrap gap-2 text-sm">
-        <li>
-          <a
-            href={`mailto:${site.email}`}
-            class="inline-flex items-center px-3 py-1.5 rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] hover:border-[var(--color-accent)] dark:hover:border-[var(--color-accent-dark)] transition-colors"
-            >Email</a
-          >
-        </li>
-        <li>
-          <a
-            href={site.links.linkedin}
-            target="_blank"
-            rel="me noopener noreferrer"
-            class="inline-flex items-center px-3 py-1.5 rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] hover:border-[var(--color-accent)] dark:hover:border-[var(--color-accent-dark)] transition-colors"
-            >LinkedIn</a
-          >
-        </li>
-        <li>
-          <a
-            href={site.links.github}
-            target="_blank"
-            rel="me noopener noreferrer"
-            class="inline-flex items-center px-3 py-1.5 rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] hover:border-[var(--color-accent)] dark:hover:border-[var(--color-accent-dark)] transition-colors"
-            >GitHub</a
-          >
-        </li>
-      </ul>
-    </div>
-
-    <div class="shrink-0">
-      <img
-        src="/headshot.jpg"
-        alt={`Portrait of ${site.name}`}
-        width="120"
-        height="120"
-        loading="eager"
-        decoding="async"
-        class="rounded-full size-[120px] object-cover border border-[var(--color-border)] dark:border-[var(--color-border-dark)]"
-      />
+      <p class={`mt-0.5 text-sm ${muted}`}>{site.employer} · {site.team}</p>
     </div>
   </div>
-</section>
+
+  <p class={`mt-6 text-sm leading-[1.6] ${muted}`}>{site.tagline}</p>
+
+  <ul
+    class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm lg:mt-8 lg:flex-col lg:gap-3 lg:border-t lg:border-[var(--color-border)] lg:dark:border-[var(--color-border-dark)] lg:pt-6"
+  >
+    {
+      links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            target={l.external ? "_blank" : undefined}
+            rel={l.external ? "me noopener noreferrer" : undefined}
+            class="group inline-flex items-baseline gap-2 hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+          >
+            <span class="font-medium">{l.label}</span>
+            <span class={`hidden lg:inline text-xs ${muted} group-hover:text-current transition-colors`}>{l.meta}</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</aside>
