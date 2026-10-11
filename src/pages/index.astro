@@ -9,12 +9,19 @@ import Media from "../components/Media.astro";
 import Publications from "../components/Publications.astro";
 ---
 
-<Layout>
-  <Hero />
-  <About />
-  <SelectedWork />
-  <RecognitionService />
-  <Events />
-  <Media />
-  <Publications />
+<Layout container="wide">
+  <div
+    class="pt-12 sm:pt-16 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-20 xl:grid-cols-[300px_minmax(0,1fr)] xl:gap-24"
+  >
+    <Hero />
+
+    <main class="mt-14 lg:mt-0 [&>section:first-child]:border-t-0 [&>section:first-child]:mt-0 [&>section:first-child]:pt-0">
+      <About />
+      <SelectedWork />
+      <RecognitionService />
+      <Events />
+      <Media />
+      <Publications />
+    </main>
+  </div>
 </Layout>
