@@ -10,9 +10,16 @@ import { site } from "../data/site";
 export type Props = {
   title?: string;
   description?: string;
+  bodyClass?: string;
+  containerClass?: string;
 };
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  bodyClass,
+  containerClass = "mx-auto max-w-[760px] px-5 sm:px-6 pb-24",
+} = Astro.props;
 const pageTitle = title ?? site.name;
 const pageDescription = description ?? site.description;
 const canonical = new URL(Astro.url.pathname, site.url).toString();
@@ -59,8 +66,9 @@ const personSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline></script>
   </head>
-  <body class="antialiased">
-    <div class="mx-auto max-w-[760px] px-5 sm:px-6 pb-24">
+  <body class:list={["antialiased", bodyClass]}>
+    <slot name="hero" />
+    <div class={containerClass}>
       <slot />
 
       <footer
