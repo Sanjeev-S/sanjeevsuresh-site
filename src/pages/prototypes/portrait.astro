@@ -1,0 +1,403 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { site } from "../../data/site";
+
+const portrait = "/headshot.jpg";
+---
+
+<Layout
+  title={`Portrait hero prototypes · ${site.name}`}
+  description="Four hero directions that feature the new studio portrait and lift the site's sophistication."
+>
+  <div class="pt-10">
+    <a
+      href="/"
+      class="text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+      >← Back to homepage</a
+    >
+    <p
+      class="mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+    >
+      <span
+        class="inline-block size-1.5 rounded-full bg-[var(--color-accent)] dark:bg-[var(--color-accent-dark)]"
+      ></span>
+      Prototype · hero with new studio portrait
+    </p>
+    <h1
+      class="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+    >
+      Four ways to feature your portrait
+    </h1>
+    <p class="mt-3 max-w-[60ch] leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Each option below uses the same photo file (<code class="font-mono text-[0.9em]">public/headshot.jpg</code>),
+      so to preview with the new studio shot, save it over that path — portrait crop, 4:5, at least 1200px on
+      the long edge. All four also lift the site's sophistication the same way: a small-caps eyebrow, a larger
+      display name, quieter hairlines, and calmer link treatments instead of the current small pills + 120px
+      circle.
+    </p>
+    <p class="mt-3 max-w-[60ch] text-sm leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Your new studio portrait (grey jacket, arms crossed, grey backdrop) is vertical, so options B–D give it
+      room to breathe. Option A is the smallest change from today's homepage.
+    </p>
+  </div>
+
+  <!-- ============ OPTION A — Refined classic ============ -->
+  <section class="mt-12">
+    <div class="flex items-baseline gap-3">
+      <span
+        class="inline-flex items-center rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] px-2.5 py-0.5 text-xs font-semibold"
+        >Option A</span
+      >
+      <h2 class="text-base font-semibold tracking-tight">Refined classic — smallest change</h2>
+    </div>
+    <p class="mt-2 text-sm leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Keeps today's layout, but swaps the 120px circle for a larger rounded-rectangle portrait with a ring and
+      soft shadow, adds an eyebrow line, and promotes the tagline. Best if you want sophistication without
+      restructuring the page.
+    </p>
+
+    <div
+      class="mt-4 rounded-2xl border border-[var(--color-border)] dark:border-[var(--color-border-dark)] p-6 sm:p-10"
+    >
+      <div class="flex flex-col-reverse sm:flex-row sm:items-center gap-8">
+        <div class="flex-1 min-w-0">
+          <p
+            class="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+          >
+            {site.jobTitle} · {site.employer}
+          </p>
+          <h3
+            class="mt-2 text-4xl sm:text-5xl font-bold tracking-[-0.02em] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+          >
+            {site.name}
+          </h3>
+          <p class="mt-3 max-w-[46ch] text-[17px] leading-[1.55] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+            {site.tagline}
+          </p>
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href={`mailto:${site.email}`}
+              class="inline-flex items-center rounded-full bg-[var(--color-fg)] px-4 py-2 text-sm font-medium text-[var(--color-bg)] dark:bg-[var(--color-fg-dark)] dark:text-[var(--color-bg-dark)]"
+              >Email me</a
+            >
+            <a
+              href={site.links.linkedin}
+              target="_blank"
+              rel="me noopener noreferrer"
+              class="text-sm font-medium underline decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] underline-offset-4 hover:decoration-[var(--color-accent)] dark:hover:decoration-[var(--color-accent-dark)] transition-colors"
+              >LinkedIn</a
+            >
+            <span class="text-[var(--color-border)] dark:text-[var(--color-border-dark)]">·</span>
+            <a
+              href={site.links.github}
+              target="_blank"
+              rel="me noopener noreferrer"
+              class="text-sm font-medium underline decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] underline-offset-4 hover:decoration-[var(--color-accent)] dark:hover:decoration-[var(--color-accent-dark)] transition-colors"
+              >GitHub</a
+            >
+          </div>
+        </div>
+        <div class="shrink-0">
+          <img
+            src={portrait}
+            alt={`Studio portrait of ${site.name}`}
+            width="336"
+            height="420"
+            loading="eager"
+            decoding="async"
+            class="aspect-[4/5] w-40 sm:w-52 rounded-2xl object-cover object-top ring-1 ring-[var(--color-border)] dark:ring-[var(--color-border-dark)] shadow-[0_16px_40px_-16px_rgba(0,0,0,0.35)]"
+          />
+          <p
+            class="mt-3 text-center text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+          >
+            {site.team} · Agentic AI Ambassador
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPTION B — Editorial split ============ -->
+  <section class="mt-12">
+    <div class="flex items-baseline gap-3">
+      <span
+        class="inline-flex items-center rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] px-2.5 py-0.5 text-xs font-semibold"
+        >Option B</span
+      >
+      <h2 class="text-base font-semibold tracking-tight">Editorial split — most sophisticated</h2>
+    </div>
+    <p class="mt-2 text-sm leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Magazine-style two-column hero on a quiet tonal wash. The portrait gets a tall 3:4 frame with a caption
+      card; the intro gets room for a two-line statement and a proper call-to-action row. Recommended for the
+      new studio shot — it was composed for exactly this shape.
+    </p>
+
+    <div
+      class="mt-4 overflow-hidden rounded-2xl border border-[var(--color-border)] dark:border-[var(--color-border-dark)]"
+    >
+      <div
+        class="grid gap-0 sm:grid-cols-[1.15fr_0.85fr] bg-gradient-to-b from-[var(--color-card)] to-transparent dark:from-[var(--color-card-dark)]"
+      >
+        <div class="p-6 sm:p-10 flex flex-col justify-center">
+          <p
+            class="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+          >
+            {site.jobTitle} · {site.employer} · {site.team}
+          </p>
+          <h3
+            class="mt-3 text-4xl sm:text-[3.25rem] font-bold leading-[1.05] tracking-[-0.025em] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+          >
+            {site.name}
+          </h3>
+          <p class="mt-4 max-w-[44ch] text-[17px] leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            I build large-scale ranking and personalization at Uber — and I work in the open to keep AI open to
+            everyone.
+          </p>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <a
+              href="#work"
+              class="inline-flex items-center rounded-full bg-[var(--color-fg)] px-5 py-2.5 text-sm font-medium text-[var(--color-bg)] dark:bg-[var(--color-fg-dark)] dark:text-[var(--color-bg-dark)]"
+              >View selected work</a
+            >
+            <a
+              href={`mailto:${site.email}`}
+              class="inline-flex items-center rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] px-5 py-2.5 text-sm font-medium hover:border-[var(--color-accent)] dark:hover:border-[var(--color-accent-dark)] transition-colors"
+              >Get in touch</a
+            >
+          </div>
+          <p class="mt-6 text-xs tracking-wide text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            Ambassador, Agentic AI Foundation (Linux Foundation) ·
+            <a
+              href={site.links.linkedin}
+              target="_blank"
+              rel="me noopener noreferrer"
+              class="underline underline-offset-4 hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)]"
+              >LinkedIn</a
+            >
+            ·
+            <a
+              href={site.links.github}
+              target="_blank"
+              rel="me noopener noreferrer"
+              class="underline underline-offset-4 hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)]"
+              >GitHub</a
+            >
+          </p>
+        </div>
+        <div class="p-6 sm:p-10 sm:pl-0 flex items-stretch">
+          <figure class="w-full">
+            <img
+              src={portrait}
+              alt={`Studio portrait of ${site.name}, arms crossed`}
+              width="600"
+              height="800"
+              loading="lazy"
+              decoding="async"
+              class="aspect-[3/4] w-full rounded-xl object-cover object-top ring-1 ring-[var(--color-border)] dark:ring-[var(--color-border-dark)] shadow-[0_24px_60px_-24px_rgba(0,0,0,0.45)]"
+            />
+            <figcaption
+              class="mt-3 flex items-center justify-between text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+            >
+              <span>{site.name}</span>
+              <span>Staff ML Engineer, Uber</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPTION C — Centered statement ============ -->
+  <section class="mt-12">
+    <div class="flex items-baseline gap-3">
+      <span
+        class="inline-flex items-center rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] px-2.5 py-0.5 text-xs font-semibold"
+        >Option C</span
+      >
+      <h2 class="text-base font-semibold tracking-tight">Centered statement — warmest</h2>
+    </div>
+    <p class="mt-2 text-sm leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      Centered arch-frame portrait above a centered intro. Graceful on mobile, confident on desktop, and the
+      arch flatters a studio head-and-shoulders crop. Best if you want the site to feel personal rather than
+      corporate.
+    </p>
+
+    <div
+      class="mt-4 rounded-2xl border border-[var(--color-border)] dark:border-[var(--color-border-dark)] px-6 py-10 sm:py-14 text-center"
+    >
+      <img
+        src={portrait}
+        alt={`Studio portrait of ${site.name}`}
+        width="440"
+        height="560"
+        loading="lazy"
+        decoding="async"
+        class="mx-auto aspect-[5/6] w-44 sm:w-56 rounded-t-[999px] rounded-b-2xl object-cover object-top ring-1 ring-[var(--color-border)] dark:ring-[var(--color-border-dark)] ring-offset-4 ring-offset-[var(--color-bg)] dark:ring-offset-[var(--color-bg-dark)] shadow-[0_20px_50px_-20px_rgba(0,0,0,0.4)]"
+      />
+      <p
+        class="mt-8 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+      >
+        {site.jobTitle} · {site.employer}
+      </p>
+      <h3
+        class="mx-auto mt-2 max-w-[16ch] text-4xl sm:text-5xl font-bold tracking-[-0.02em] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+      >
+        {site.name}
+      </h3>
+      <p
+        class="mx-auto mt-4 max-w-[52ch] text-[17px] leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+      >
+        {site.tagline} Currently working on ranking and personalization across Mobility and Delivery.
+      </p>
+      <div class="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium">
+        <a
+          href={`mailto:${site.email}`}
+          class="inline-flex items-center rounded-full bg-[var(--color-fg)] px-5 py-2.5 text-[var(--color-bg)] dark:bg-[var(--color-fg-dark)] dark:text-[var(--color-bg-dark)]"
+          >Email</a
+        >
+        <a
+          href={site.links.linkedin}
+          target="_blank"
+          rel="me noopener noreferrer"
+          class="underline underline-offset-4 decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] hover:decoration-[var(--color-accent)] dark:hover:decoration-[var(--color-accent-dark)] transition-colors"
+          >LinkedIn →</a
+        >
+        <a
+          href={site.links.github}
+          target="_blank"
+          rel="me noopener noreferrer"
+          class="underline underline-offset-4 decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] hover:decoration-[var(--color-accent)] dark:hover:decoration-[var(--color-accent-dark)] transition-colors"
+          >GitHub →</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPTION D — Feature card ============ -->
+  <section class="mt-12 mb-4">
+    <div class="flex items-baseline gap-3">
+      <span
+        class="inline-flex items-center rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] px-2.5 py-0.5 text-xs font-semibold"
+        >Option D</span
+      >
+      <h2 class="text-base font-semibold tracking-tight">Feature card — most informative</h2>
+    </div>
+    <p class="mt-2 text-sm leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      A single confident card: portrait, intro, and three focus areas in one glance. Adds the most
+      sophistication per pixel through alignment, a soft shadow, and a speaking-availability signal. Best if
+      you want the hero to do more work for conference and podcast outreach.
+    </p>
+
+    <div
+      class="mt-4 rounded-2xl border border-[var(--color-border)] dark:border-[var(--color-border-dark)] bg-[var(--color-card)] dark:bg-[var(--color-card-dark)] p-6 sm:p-8 shadow-[0_24px_60px_-32px_rgba(0,0,0,0.35)]"
+    >
+      <div class="flex flex-col sm:flex-row gap-6 sm:gap-8">
+        <div class="shrink-0">
+          <img
+            src={portrait}
+            alt={`Studio portrait of ${site.name}`}
+            width="400"
+            height="480"
+            loading="lazy"
+            decoding="async"
+            class="aspect-[5/6] w-36 sm:w-48 rounded-xl object-cover object-top ring-1 ring-[var(--color-border)] dark:ring-[var(--color-border-dark)]"
+          />
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] dark:border-[var(--color-border-dark)] bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] px-3 py-1 text-xs font-medium">
+            <span class="inline-block size-1.5 rounded-full bg-emerald-500"></span>
+            Open to speaking &amp; podcasts
+          </p>
+          <h3
+            class="mt-3 text-3xl sm:text-4xl font-bold tracking-[-0.02em] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]"
+          >
+            {site.name}
+          </h3>
+          <p class="mt-1 text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            {site.jobTitle} at {site.employer} · {site.team}
+          </p>
+          <p class="mt-3 max-w-[56ch] leading-[1.6] text-[15px]">
+            {site.tagline} Ambassador for the Agentic AI Foundation, advancing open-source agentic AI.
+          </p>
+          <dl class="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+            <div
+              class="rounded-lg border border-[var(--color-border)] dark:border-[var(--color-border-dark)] bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] px-3 py-2.5"
+            >
+              <dt
+                class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+              >
+                Focus
+              </dt>
+              <dd class="mt-0.5 font-medium">Ranking &amp; personalization</dd>
+            </div>
+            <div
+              class="rounded-lg border border-[var(--color-border)] dark:border-[var(--color-border-dark)] bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] px-3 py-2.5"
+            >
+              <dt
+                class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+              >
+                Surface
+              </dt>
+              <dd class="mt-0.5 font-medium">Mobility &amp; Delivery</dd>
+            </div>
+            <div
+              class="rounded-lg border border-[var(--color-border)] dark:border-[var(--color-border-dark)] bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] px-3 py-2.5"
+            >
+              <dt
+                class="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+              >
+                Open source
+              </dt>
+              <dd class="mt-0.5 font-medium">Agentic AI Ambassador</dd>
+            </div>
+          </dl>
+          <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium">
+            <a
+              href={`mailto:${site.email}`}
+              class="underline underline-offset-4 decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] hover:decoration-[var(--color-accent)] dark:hover:decoration-[var(--color-accent-dark)] transition-colors"
+              >{site.email}</a
+            >
+            <a
+              href={site.links.linkedin}
+              target="_blank"
+              rel="me noopener noreferrer"
+              class="underline underline-offset-4 decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] hover:decoration-[var(--color-accent)] dark:hover:decoration-[var(--color-accent-dark)] transition-colors"
+              >LinkedIn</a
+            >
+            <a
+              href={site.links.github}
+              target="_blank"
+              rel="me noopener noreferrer"
+              class="underline underline-offset-4 decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] hover:decoration-[var(--color-accent)] dark:hover:decoration-[var(--color-accent-dark)] transition-colors"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="mt-12 rounded-2xl border border-dashed border-[var(--color-border)] dark:border-[var(--color-border-dark)] p-6 text-sm leading-[1.6] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+  >
+    <h2 class="font-semibold text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">How to pick</h2>
+    <ul class="mt-2 list-disc pl-5 space-y-1">
+      <li>
+        <strong class="font-semibold">A</strong> if you want to ship this week with minimal review.
+      </li>
+      <li>
+        <strong class="font-semibold">B</strong> if you want the site to feel like a staff-level portfolio —
+        my recommendation for the new studio portrait.
+      </li>
+      <li><strong class="font-semibold">C</strong> if warmth and approachability matter most.</li>
+      <li>
+        <strong class="font-semibold">D</strong> if you want the hero to route speaking and collaboration
+        inbound.
+      </li>
+    </ul>
+    <p class="mt-3">
+      Reply with the option you like (and any tweaks), and I'll apply it to the homepage, swap in the new
+      photo, and remove this prototypes page before merging.
+    </p>
+  </section>
+</Layout>
