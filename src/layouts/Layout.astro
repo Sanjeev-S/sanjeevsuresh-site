@@ -10,9 +10,12 @@ import { site } from "../data/site";
 export type Props = {
   title?: string;
   description?: string;
+  /** Page container width. "none" lets the page manage its own containers (e.g. full-bleed heroes). */
+  container?: "narrow" | "wide" | "none";
 };
 
-const { title, description } = Astro.props;
+const { title, description, container = "narrow" } = Astro.props;
+const containerWidth = container === "wide" ? "max-w-[1100px]" : "max-w-[760px]";
 const pageTitle = title ?? site.name;
 const pageDescription = description ?? site.description;
 const canonical = new URL(Astro.url.pathname, site.url).toString();
@@ -60,9 +63,17 @@ const personSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline></script>
   </head>
   <body class="antialiased">
-    <div class="mx-auto max-w-[760px] px-5 sm:px-6 pb-24">
-      <slot />
+    {
+      container === "none" ? (
+        <slot />
+      ) : (
+        <div class={`mx-auto ${containerWidth} px-5 sm:px-6`}>
+          <slot />
+        </div>
+      )
+    }
 
+    <div class={`mx-auto ${containerWidth} px-5 sm:px-6 pb-24`}>
       <footer
         class="mt-20 pt-8 border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
       >
