@@ -1,0 +1,88 @@
+---
+import "@fontsource/instrument-serif/latin-400.css";
+import "@fontsource/instrument-serif/latin-400-italic.css";
+import "../../../styles/prototypes.css";
+
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import PrototypeBar from "../../../components/prototypes/PrototypeBar.astro";
+import ProfileSections from "../../../components/prototypes/ProfileSections.astro";
+import portrait from "../../../assets/portrait.jpg";
+import { site } from "../../../data/site";
+
+const muted = "text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
+const link = "hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors";
+const links = [
+  { label: "Email", href: `mailto:${site.email}` },
+  { label: "LinkedIn", href: site.links.linkedin, external: true },
+  { label: "GitHub", href: site.links.github, external: true },
+];
+---
+
+<Layout
+  title="Prototype A · Editorial · Sanjeev Suresh"
+  bodyClass="theme-paper"
+  containerClass="mx-auto max-w-[1120px] px-5 sm:px-8 pb-24"
+>
+  <PrototypeBar slot="hero" current="a" />
+
+  <header class="flex items-center justify-between py-6 text-sm">
+    <span class="serif-display text-xl">S. Suresh</span>
+    <nav aria-label="Sections" class={muted}>
+      <ul class="flex gap-5">
+        <li class="hidden sm:block"><a href="#about" class={link}>About</a></li>
+        <li class="hidden sm:block"><a href="#work" class={link}>Work</a></li>
+        <li><a href="#publications" class={link}>Writing</a></li>
+        <li><a href={`mailto:${site.email}`} class={link}>Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section
+    class="grid md:grid-cols-[1fr_minmax(0,400px)] gap-10 md:gap-16 items-end pt-8 md:pt-16"
+  >
+    <div>
+      <p class={`text-xs font-medium uppercase tracking-[0.16em] ${muted}`}>
+        {site.jobTitle} · {site.employer}
+      </p>
+      <h1 class="serif-display mt-5 text-[clamp(3.75rem,10vw,8rem)] leading-[0.9]">
+        Sanjeev<br />Suresh
+      </h1>
+      <p class="serif-display italic mt-8 text-[1.75rem] leading-[1.2] max-w-[24ch]">
+        {site.tagline}
+      </p>
+      <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium">
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                class={`border-b border-current pb-0.5 ${link}`}
+                {...(l.external ? { target: "_blank", rel: "me noopener noreferrer" } : {})}
+              >
+                {l.label}
+                <span aria-hidden="true"> ↗</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <figure>
+      <Picture
+        src={portrait}
+        formats={["avif", "webp"]}
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 768px) 400px, 100vw"
+        alt={`Portrait of ${site.name}`}
+        loading="eager"
+        fetchpriority="high"
+        class="w-full aspect-[4/5] object-cover object-[50%_25%]"
+      />
+      <figcaption class={`mt-3 text-xs ${muted}`}>{site.team}, {site.employer}</figcaption>
+    </figure>
+  </section>
+
+  <ProfileSections split numbered serifHeadings />
+</Layout>

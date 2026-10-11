@@ -1,0 +1,61 @@
+---
+import "@fontsource/instrument-serif/latin-400.css";
+import "../../../styles/prototypes.css";
+
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import PrototypeBar from "../../../components/prototypes/PrototypeBar.astro";
+import About from "../../../components/About.astro";
+import SelectedWork from "../../../components/SelectedWork.astro";
+import RecognitionService from "../../../components/RecognitionService.astro";
+import Events from "../../../components/Events.astro";
+import Media from "../../../components/Media.astro";
+import Publications from "../../../components/Publications.astro";
+import portraitSquare from "../../../assets/portrait-square.jpg";
+import { site } from "../../../data/site";
+
+const muted = "text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
+const link =
+  "underline decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] underline-offset-4 hover:decoration-current hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors";
+---
+
+<Layout title="Prototype D · Refined classic · Sanjeev Suresh">
+  <PrototypeBar slot="hero" current="d" />
+
+  <section class="pt-14 sm:pt-20">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-7 sm:gap-10">
+      <Picture
+        src={portraitSquare}
+        formats={["avif", "webp"]}
+        widths={[176, 352, 528]}
+        sizes="176px"
+        alt={`Portrait of ${site.name}`}
+        loading="eager"
+        fetchpriority="high"
+        class="size-[176px] shrink-0 rounded-full object-cover ring-1 ring-[var(--color-border)] dark:ring-[var(--color-border-dark)] ring-offset-4 ring-offset-[var(--color-bg)] dark:ring-offset-[var(--color-bg-dark)]"
+      />
+
+      <div class="min-w-0">
+        <h1 class="serif-display text-5xl sm:text-6xl leading-none">{site.name}</h1>
+        <p class="mt-3">
+          {site.jobTitle} <span class={muted}>at</span>
+          {site.employer}
+        </p>
+        <p class={`mt-1 text-sm ${muted}`}>{site.tagline}</p>
+
+        <ul class="mt-5 flex flex-wrap gap-x-5 gap-y-1 text-sm">
+          <li><a href={`mailto:${site.email}`} class={link}>Email</a></li>
+          <li><a href={site.links.linkedin} target="_blank" rel="me noopener noreferrer" class={link}>LinkedIn</a></li>
+          <li><a href={site.links.github} target="_blank" rel="me noopener noreferrer" class={link}>GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <About />
+  <SelectedWork />
+  <RecognitionService />
+  <Events />
+  <Media />
+  <Publications />
+</Layout>

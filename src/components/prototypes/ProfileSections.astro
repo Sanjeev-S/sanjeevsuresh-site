@@ -1,0 +1,143 @@
+---
+import { selectedWork } from "../../data/selectedWork";
+import { service } from "../../data/service";
+import { events } from "../../data/events";
+import { media } from "../../data/media";
+import { publications } from "../../data/publications";
+
+export type Props = {
+  /** Section label in its own left column at md+. */
+  split?: boolean;
+  numbered?: boolean;
+  serifHeadings?: boolean;
+  /** Drop the rule and top margin above the first section. */
+  flushTop?: boolean;
+};
+
+const { split = false, numbered = false, serifHeadings = false, flushTop = false } = Astro.props;
+
+type Row = { date: string; title: string; url?: string; meta?: string; venue?: string };
+
+const sections: { id: string; title: string; rows?: Row[] }[] = [
+  { id: "about", title: "About" },
+  { id: "work", title: "Selected work" },
+  {
+    id: "service",
+    title: "Recognition & service",
+    rows: service.map((s) => ({
+      date: String(s.year),
+      title: `${s.role} — ${s.organization}`,
+      url: s.url,
+      meta: s.detail,
+    })),
+  },
+  {
+    id: "events",
+    title: "Events",
+    rows: events.map((e) => ({ date: `${e.month} ${e.year}`, title: e.title, url: e.url })),
+  },
+  {
+    id: "media",
+    title: "Media",
+    rows: media.map((m) => ({
+      date: String(m.year),
+      title: m.title,
+      url: m.url,
+      meta: m.detail ? `${m.show} · ${m.detail}` : m.show,
+    })),
+  },
+  {
+    id: "publications",
+    title: "Publications & writing",
+    rows: publications.map((p) => ({
+      date: String(p.year),
+      title: p.title,
+      url: p.url,
+      meta: p.authors,
+      venue: p.venue,
+    })),
+  },
+];
+
+const muted = "text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
+const rule = "border-[var(--color-border)] dark:border-[var(--color-border-dark)]";
+const link = "hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors";
+const headingClass = serifHeadings
+  ? "serif-display text-[1.875rem] leading-none"
+  : `text-xs font-medium uppercase tracking-[0.14em] ${muted}`;
+---
+
+{
+  sections.map((section, i) => (
+    <section
+      id={section.id}
+      class:list={[
+        "border-t",
+        rule,
+        flushTop && i === 0 ? "border-t-0 pt-0 mt-0" : "pt-10 mt-14",
+        split && "md:grid md:grid-cols-[220px_1fr] md:gap-10",
+      ]}
+    >
+      <h2 class:list={["flex items-baseline gap-3", headingClass, split && "md:sticky md:top-8 md:self-start"]}>
+        {numbered && (
+          <span class={`font-sans text-xs tabular-nums tracking-normal ${muted}`}>{String(i + 1).padStart(2, "0")}</span>
+        )}
+        <span>{section.title}</span>
+      </h2>
+
+      <div class:list={["mt-5", split && "md:mt-0"]}>
+        {section.id === "about" && (
+          <p class="text-lg leading-[1.6] max-w-[62ch]">
+            I'm a Staff ML Engineer at Uber on the Next Personalization team, working on ranking and personalization
+            across both Mobility and Delivery. I'm also an Ambassador for the Agentic AI Foundation, a Linux Foundation
+            initiative advancing open-source agentic AI.
+          </p>
+        )}
+
+        {section.id === "work" &&
+          selectedWork.map((item) => (
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`group block rounded-xl border ${rule} bg-[var(--color-card)] dark:bg-[var(--color-card-dark)] p-6 hover:border-[var(--color-accent)] dark:hover:border-[var(--color-accent-dark)] transition-colors`}
+            >
+              <h3 class:list={[serifHeadings ? "serif-display text-2xl leading-tight" : "font-semibold"]}>{item.title}</h3>
+              <p class={`mt-2 text-sm leading-[1.6] ${muted}`}>{item.summary}</p>
+              <p class="mt-4 text-sm font-medium text-[var(--color-accent)] dark:text-[var(--color-accent-dark)]">
+                Read on the Uber Engineering Blog <span aria-hidden="true">→</span>
+              </p>
+            </a>
+          ))}
+
+        {section.rows && (
+          <ul class="divide-y divide-[var(--color-border)] dark:divide-[var(--color-border-dark)]">
+            {section.rows.map((row) => (
+              <li class="grid grid-cols-[76px_1fr] gap-4 py-4 first:pt-0">
+                <span class={`tabular-nums text-sm pt-0.5 ${muted}`}>{row.date}</span>
+                <div class="min-w-0">
+                  <p class="leading-[1.5]">
+                    {row.url ? (
+                      <a href={row.url} target="_blank" rel="noopener noreferrer" class={link}>
+                        {row.title}
+                      </a>
+                    ) : (
+                      row.title
+                    )}
+                  </p>
+                  {(row.meta || row.venue) && (
+                    <p class={`mt-1 text-sm ${muted}`}>
+                      {row.meta}
+                      {row.meta && row.venue && " · "}
+                      {row.venue && <span class="italic">{row.venue}</span>}
+                    </p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  ))
+}

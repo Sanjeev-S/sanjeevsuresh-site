@@ -1,0 +1,83 @@
+---
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import portrait from "../../../assets/portrait.jpg";
+
+const muted = "text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
+
+const options = [
+  {
+    id: "a",
+    name: "Editorial",
+    summary:
+      "Warm paper background, oversized serif name, and the full 4:5 portrait set like a magazine profile. Sections get numbered labels in a left column.",
+    tradeoff: "Biggest visual change. Needs the wider 1120px layout.",
+  },
+  {
+    id: "b",
+    name: "Studio",
+    summary:
+      "Full-bleed charcoal hero that matches the photo's backdrop, so the portrait fades into the page. Content below stays in today's single column.",
+    tradeoff: "Most dramatic first impression; the hero is always dark, even in light mode.",
+  },
+  {
+    id: "c",
+    name: "Profile",
+    summary:
+      "Sticky sidebar with portrait, name, and section navigation, while the content scrolls beside it. Common on staff engineer and research sites.",
+    tradeoff: "Best for scanning a growing list of work. Stacks into one column on mobile.",
+  },
+  {
+    id: "d",
+    name: "Refined classic",
+    summary:
+      "Today's layout, kept intact: a larger circular head-and-shoulders crop, serif name, and understated text links instead of pills.",
+    tradeoff: "Smallest change. Ship-ready by swapping only the hero.",
+  },
+];
+---
+
+<Layout title="Portrait prototypes · Sanjeev Suresh" description="Four ways to bring the new portrait onto the homepage.">
+  <section class="pt-12 sm:pt-16">
+    <p class={muted}>Prototype page, not linked from the homepage</p>
+    <h1 class="mt-2 text-2xl sm:text-3xl font-bold tracking-tight">New portrait: four directions</h1>
+    <p class="mt-3 leading-[1.55]">
+      Each option is a full homepage built with the real content, so you can scroll it, resize it, and try dark mode.
+      Images are served as AVIF/WebP at the sizes each layout needs.
+    </p>
+  </section>
+
+  <ol class="mt-12 grid gap-4">
+    {
+      options.map((o) => (
+        <li>
+          <a
+            href={`/prototypes/portrait/${o.id}`}
+            class="group grid grid-cols-[72px_1fr] gap-5 rounded-xl border border-[var(--color-border)] dark:border-[var(--color-border-dark)] p-5 hover:border-[var(--color-accent)] dark:hover:border-[var(--color-accent-dark)] transition-colors"
+          >
+            <span class="text-3xl font-semibold tracking-tight tabular-nums text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] group-hover:text-[var(--color-accent)] dark:group-hover:text-[var(--color-accent-dark)]">
+              {o.id.toUpperCase()}
+            </span>
+            <span class="min-w-0">
+              <span class="block font-semibold">{o.name}</span>
+              <span class="mt-1 block leading-[1.55]">{o.summary}</span>
+              <span class={`mt-2 block ${muted}`}>{o.tradeoff}</span>
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+
+  <section class="mt-16 border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] pt-10">
+    <h2 class="text-base font-semibold tracking-tight">Source photo</h2>
+    <Picture
+      src={portrait}
+      formats={["avif", "webp"]}
+      widths={[240, 480]}
+      sizes="240px"
+      alt="Portrait of Sanjeev Suresh"
+      class="mt-4 w-[240px] aspect-[3/4] object-cover rounded-lg"
+    />
+  </section>
+</Layout>

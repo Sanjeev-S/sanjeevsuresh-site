@@ -1,0 +1,77 @@
+---
+import "../../../styles/prototypes.css";
+
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import PrototypeBar from "../../../components/prototypes/PrototypeBar.astro";
+import ProfileSections from "../../../components/prototypes/ProfileSections.astro";
+import portrait from "../../../assets/portrait.jpg";
+import { site } from "../../../data/site";
+
+const muted = "text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
+const link = "hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors";
+const nav = [
+  { href: "#about", label: "About" },
+  { href: "#work", label: "Selected work" },
+  { href: "#service", label: "Recognition" },
+  { href: "#events", label: "Events" },
+  { href: "#media", label: "Media" },
+  { href: "#publications", label: "Writing" },
+];
+---
+
+<Layout
+  title="Prototype C · Profile · Sanjeev Suresh"
+  bodyClass="theme-profile"
+  containerClass="mx-auto max-w-[1120px] px-5 sm:px-8 pb-24"
+>
+  <PrototypeBar slot="hero" current="c" />
+
+  <div class="lg:grid lg:grid-cols-[300px_1fr] lg:gap-20">
+    <aside class="pt-12 lg:sticky lg:top-0 lg:self-start lg:py-14">
+      <Picture
+        src={portrait}
+        formats={["avif", "webp"]}
+        widths={[320, 480, 640]}
+        sizes="(min-width: 1024px) 260px, 200px"
+        alt={`Portrait of ${site.name}`}
+        loading="eager"
+        fetchpriority="high"
+        class="w-[200px] lg:w-[260px] aspect-[4/5] object-cover object-[50%_22%] rounded-2xl shadow-[0_1px_2px_rgba(0,0,0,0.06),0_12px_32px_-12px_rgba(0,0,0,0.35)]"
+      />
+
+      <h1 class="mt-8 text-3xl font-semibold tracking-[-0.025em]">{site.name}</h1>
+      <p class="mt-1.5 font-medium">{site.jobTitle}</p>
+      <p class={`text-sm ${muted}`}>{site.team} · {site.employer}</p>
+      <p class={`mt-4 text-sm leading-[1.6] max-w-[32ch] ${muted}`}>{site.tagline}</p>
+
+      <nav aria-label="Sections" class="profile-nav hidden lg:block mt-10">
+        <ul class="space-y-2.5 text-xs font-medium uppercase tracking-[0.14em]">
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class={`group inline-flex items-center gap-3 ${muted} hover:text-[var(--color-fg)] dark:hover:text-[var(--color-fg-dark)]`}
+                >
+                  <span class="line inline-block h-px w-6 bg-[var(--color-border)] dark:bg-[var(--color-border-dark)]" />
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <ul class="mt-8 flex gap-5 text-sm font-medium">
+        <li><a href={`mailto:${site.email}`} class={link}>Email</a></li>
+        <li><a href={site.links.linkedin} target="_blank" rel="me noopener noreferrer" class={link}>LinkedIn</a></li>
+        <li><a href={site.links.github} target="_blank" rel="me noopener noreferrer" class={link}>GitHub</a></li>
+      </ul>
+    </aside>
+
+    <main class="pt-14 lg:pt-14">
+      <ProfileSections flushTop />
+    </main>
+  </div>
+</Layout>

@@ -1,0 +1,43 @@
+---
+export type Props = {
+  current: "a" | "b" | "c" | "d";
+};
+
+const { current } = Astro.props;
+
+const options = [
+  { id: "a", name: "Editorial" },
+  { id: "b", name: "Studio" },
+  { id: "c", name: "Profile" },
+  { id: "d", name: "Refined classic" },
+] as const;
+---
+
+<nav
+  aria-label="Portrait prototypes"
+  class="relative z-10 border-b border-[var(--color-border)] dark:border-[var(--color-border-dark)] bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-xs"
+>
+  <div class="mx-auto max-w-[1120px] px-5 sm:px-8 py-2.5 flex flex-wrap items-center gap-x-4 gap-y-1">
+    <a href="/prototypes/portrait" class="font-medium hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)]"
+      >Portrait prototypes</a
+    >
+    <ul class="flex flex-wrap gap-x-3 gap-y-1 text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+      {
+        options.map((o) => (
+          <li>
+            <a
+              href={`/prototypes/portrait/${o.id}`}
+              aria-current={o.id === current ? "page" : undefined}
+              class:list={[
+                "hover:text-[var(--color-fg)] dark:hover:text-[var(--color-fg-dark)]",
+                o.id === current && "text-[var(--color-fg)] dark:text-[var(--color-fg-dark)] underline underline-offset-4",
+              ]}
+            >
+              {o.id.toUpperCase()} · {o.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>

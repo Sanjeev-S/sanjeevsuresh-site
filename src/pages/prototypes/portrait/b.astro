@@ -1,0 +1,67 @@
+---
+import "@fontsource/instrument-serif/latin-400.css";
+import "../../../styles/prototypes.css";
+
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import PrototypeBar from "../../../components/prototypes/PrototypeBar.astro";
+import ProfileSections from "../../../components/prototypes/ProfileSections.astro";
+import portrait from "../../../assets/portrait.jpg";
+import { site } from "../../../data/site";
+
+const ghost =
+  "inline-flex items-center rounded-full border border-white/25 px-4 py-2 text-sm font-medium hover:border-white hover:bg-white/5 transition-colors";
+---
+
+<Layout title="Prototype B · Studio · Sanjeev Suresh" bodyClass="theme-studio">
+  <Fragment slot="hero">
+    <PrototypeBar current="b" />
+
+    <section class="relative overflow-hidden bg-[#141416] text-[#f4f4f5]">
+      <div class="md:absolute md:inset-y-0 md:right-0 md:w-[60%] lg:w-[52%]">
+        <Picture
+          src={portrait}
+          formats={["avif", "webp"]}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 768px) 60vw, 100vw"
+          alt={`Portrait of ${site.name}`}
+          loading="eager"
+          fetchpriority="high"
+          class="studio-photo w-full h-[460px] sm:h-[580px] md:h-full object-cover object-[50%_18%] md:object-[50%_8%]"
+        />
+      </div>
+
+      <div
+        class="relative mx-auto max-w-[1120px] px-5 sm:px-8 -mt-20 md:mt-0 pb-16 md:py-24 md:min-h-[620px] md:flex md:items-center"
+      >
+        <div class="md:max-w-[46%]">
+          <p class="text-xs font-medium uppercase tracking-[0.18em] text-[#a1a1aa]">
+            {site.employer} · {site.team}
+          </p>
+          <h1 class="mt-4 text-5xl sm:text-6xl font-semibold tracking-[-0.035em] leading-[0.95]">
+            {site.name}
+          </h1>
+          <p class="mt-3 text-lg text-[#d4d4d8]">{site.jobTitle}</p>
+          <p class="serif-display mt-8 text-[1.75rem] leading-[1.2] text-[#e4e4e7] max-w-[26ch]">
+            “{site.tagline}”
+          </p>
+          <ul class="mt-10 flex flex-wrap gap-3">
+            <li>
+              <a
+                href={`mailto:${site.email}`}
+                class="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-medium text-[#141416] hover:bg-[#e4e4e7] transition-colors"
+                >Get in touch</a
+              >
+            </li>
+            <li><a href={site.links.linkedin} target="_blank" rel="me noopener noreferrer" class={ghost}>LinkedIn</a></li>
+            <li><a href={site.links.github} target="_blank" rel="me noopener noreferrer" class={ghost}>GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </Fragment>
+
+  <div class="pt-16">
+    <ProfileSections serifHeadings flushTop />
+  </div>
+</Layout>

@@ -1,0 +1,114 @@
+.serif-display {
+  font-family: "Instrument Serif", ui-serif, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+body[class*="theme-"] {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+.theme-paper {
+  --color-bg: #f5f3ee;
+  --color-fg: #1b1a17;
+  --color-muted: #5f5b53;
+  --color-border: #dcd8ce;
+  --color-card: #ebe8e0;
+  --color-accent: #7a4b1f;
+}
+
+.theme-studio {
+  --color-bg: #fafafa;
+  --color-fg: #121214;
+  --color-muted: #57575c;
+  --color-border: #e4e4e7;
+  --color-card: #f1f1f2;
+  --color-accent: #3f4a5c;
+}
+
+.theme-profile {
+  --color-bg: #fbfbfa;
+  --color-fg: #18181b;
+  --color-muted: #5c5c63;
+  --color-border: #e6e6e3;
+  --color-card: #f2f2ef;
+  --color-accent: #1e3a8a;
+}
+
+@media (prefers-color-scheme: dark) {
+  body[class*="theme-"] {
+    background-color: var(--color-bg-dark);
+    color: var(--color-fg-dark);
+  }
+
+  .theme-paper {
+    --color-bg-dark: #141311;
+    --color-fg-dark: #ece8df;
+    --color-muted-dark: #a39e93;
+    --color-border-dark: #2c2a26;
+    --color-card-dark: #1c1b18;
+    --color-accent-dark: #d9ab7c;
+  }
+
+  .theme-studio {
+    --color-bg-dark: #0f0f10;
+    --color-fg-dark: #f4f4f5;
+    --color-muted-dark: #a1a1aa;
+    --color-border-dark: #26262a;
+    --color-card-dark: #18181b;
+    --color-accent-dark: #cbd5e1;
+  }
+
+  .theme-profile {
+    --color-bg-dark: #0c0c0d;
+    --color-fg-dark: #ededed;
+    --color-muted-dark: #a1a1aa;
+    --color-border-dark: #232326;
+    --color-card-dark: #161618;
+    --color-accent-dark: #93c5fd;
+  }
+}
+
+/* Eased stops: a linear ramp over the photo's light-grey left edge reads as a visible seam. */
+.studio-photo {
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      rgb(0 0 0 / 0.04) 8%,
+      rgb(0 0 0 / 0.15) 16%,
+      rgb(0 0 0 / 0.35) 24%,
+      rgb(0 0 0 / 0.62) 32%,
+      rgb(0 0 0 / 0.86) 40%,
+      #000 48%
+    ),
+    linear-gradient(to top, transparent 0%, rgb(0 0 0 / 0.5) 10%, #000 24%);
+  mask-composite: intersect;
+}
+
+@media (max-width: 767px) {
+  .studio-photo {
+    mask-image: linear-gradient(
+      to top,
+      transparent 0%,
+      rgb(0 0 0 / 0.1) 12%,
+      rgb(0 0 0 / 0.45) 28%,
+      rgb(0 0 0 / 0.85) 42%,
+      #000 52%
+    );
+  }
+}
+
+.profile-nav a .line {
+  transition:
+    width 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.profile-nav a:hover .line,
+.profile-nav a:focus-visible .line {
+  width: 3rem;
+  background-color: currentColor;
+}
