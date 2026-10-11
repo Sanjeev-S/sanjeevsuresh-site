@@ -1,0 +1,77 @@
+---
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import About from "../../../components/About.astro";
+import SelectedWork from "../../../components/SelectedWork.astro";
+import RecognitionService from "../../../components/RecognitionService.astro";
+import Events from "../../../components/Events.astro";
+import Media from "../../../components/Media.astro";
+import Publications from "../../../components/Publications.astro";
+import ProtoBar from "./_ProtoBar.astro";
+import portrait from "../../../assets/portrait.jpg";
+import { site } from "../../../data/site";
+
+const links = [
+  { label: "Email", href: `mailto:${site.email}`, external: false, meta: site.email },
+  { label: "LinkedIn", href: site.links.linkedin, external: true, meta: "in/sanjeevsuresh" },
+  { label: "GitHub", href: site.links.github, external: true, meta: "Sanjeev-S" },
+];
+
+const muted = "text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]";
+---
+
+<Layout container="wide" title="Prototype C · Sidebar · Sanjeev Suresh" description="Portrait prototype C: sidebar.">
+  <div class="pt-6"><ProtoBar current="c" name="Sidebar" /></div>
+
+  <div class="pt-12 lg:pt-16 lg:grid lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-20 xl:grid-cols-[300px_minmax(0,1fr)] xl:gap-24">
+    <aside class="lg:sticky lg:top-12 lg:self-start">
+      <div class="flex items-center gap-5 sm:gap-6 lg:block">
+        <Picture
+          src={portrait}
+          formats={["avif", "webp"]}
+          widths={[240, 320, 480, 600]}
+          sizes="(min-width: 1280px) 300px, (min-width: 1024px) 280px, (min-width: 640px) 140px, 112px"
+          alt={`Portrait of ${site.name}`}
+          loading="eager"
+          fetchpriority="high"
+          pictureAttributes={{ class: "shrink-0" }}
+          class="w-[112px] sm:w-[140px] lg:w-full h-auto aspect-[4/5] object-cover object-[50%_20%] rounded-2xl ring-1 ring-black/5 dark:ring-white/10"
+        />
+        <div class="min-w-0 lg:mt-7">
+          <h1 class="text-2xl sm:text-3xl lg:text-[1.75rem] font-semibold tracking-tight leading-[1.1]">{site.name}</h1>
+          <p class="mt-2 text-sm sm:text-[15px] leading-snug">{site.jobTitle}</p>
+          <p class={`mt-0.5 text-sm ${muted}`}>{site.employer} · {site.team}</p>
+        </div>
+      </div>
+
+      <p class={`mt-6 text-sm leading-[1.6] ${muted}`}>{site.tagline}</p>
+
+      <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm lg:mt-8 lg:flex-col lg:gap-3 lg:border-t lg:border-[var(--color-border)] lg:dark:border-[var(--color-border-dark)] lg:pt-6">
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                target={l.external ? "_blank" : undefined}
+                rel={l.external ? "me noopener noreferrer" : undefined}
+                class="group inline-flex items-baseline gap-2 hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+              >
+                <span class="font-medium">{l.label}</span>
+                <span class={`hidden lg:inline text-xs ${muted} group-hover:text-current transition-colors`}>{l.meta}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+
+    <div class="mt-14 lg:mt-0 [&>section:first-child]:border-t-0 [&>section:first-child]:mt-0 [&>section:first-child]:pt-0">
+      <About />
+      <SelectedWork />
+      <RecognitionService />
+      <Events />
+      <Media />
+      <Publications />
+    </div>
+  </div>
+</Layout>

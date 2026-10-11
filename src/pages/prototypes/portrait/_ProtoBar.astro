@@ -1,0 +1,40 @@
+---
+type Props = {
+  current: "a" | "b" | "c" | "d";
+  name: string;
+  /** Use light-on-dark styling (for variants that sit on a photo). */
+  onDark?: boolean;
+};
+
+const { current, name, onDark = false } = Astro.props;
+const all = ["a", "b", "c", "d"] as const;
+
+const base = onDark
+  ? "text-white/70 border-white/20"
+  : "text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] border-[var(--color-border)] dark:border-[var(--color-border-dark)]";
+const active = onDark ? "text-white" : "text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]";
+---
+
+<nav
+  aria-label="Prototype variants"
+  class={`flex flex-wrap items-center gap-x-4 gap-y-1 text-xs tracking-wide uppercase border-b pb-3 ${base}`}
+>
+  <a href="/prototypes/portrait" class="hover:underline underline-offset-4">← All variants</a>
+  <span aria-hidden="true">·</span>
+  <span>
+    Prototype <span class={`font-semibold ${active}`}>{current.toUpperCase()} — {name}</span>
+  </span>
+  <span class="ml-auto flex gap-3">
+    {
+      all.map((id) => (
+        <a
+          href={`/prototypes/portrait/${id}`}
+          aria-current={id === current ? "page" : undefined}
+          class={`hover:underline underline-offset-4 ${id === current ? `font-semibold ${active}` : ""}`}
+        >
+          {id.toUpperCase()}
+        </a>
+      ))
+    }
+  </span>
+</nav>

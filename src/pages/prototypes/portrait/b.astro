@@ -1,0 +1,93 @@
+---
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import About from "../../../components/About.astro";
+import SelectedWork from "../../../components/SelectedWork.astro";
+import RecognitionService from "../../../components/RecognitionService.astro";
+import Events from "../../../components/Events.astro";
+import Media from "../../../components/Media.astro";
+import Publications from "../../../components/Publications.astro";
+import ProtoBar from "./_ProtoBar.astro";
+import portrait from "../../../assets/portrait.jpg";
+import { site } from "../../../data/site";
+
+const links = [
+  { label: "Email", href: `mailto:${site.email}`, external: false },
+  { label: "LinkedIn", href: site.links.linkedin, external: true },
+  { label: "GitHub", href: site.links.github, external: true },
+];
+
+const container = "mx-auto max-w-[760px] px-5 sm:px-6";
+---
+
+<Layout container="none" title="Prototype B · Cover · Sanjeev Suresh" description="Portrait prototype B: cover.">
+  <header class="cover relative h-[88svh] min-h-[560px] max-h-[820px] overflow-hidden text-white">
+    <div class="cover-photo absolute inset-0 sm:left-auto sm:right-0 sm:h-full sm:w-auto sm:aspect-[3/4]">
+      <Picture
+        src={portrait}
+        formats={["avif", "webp"]}
+        widths={[480, 640, 960, 1230]}
+        sizes="(min-width: 640px) 66vh, 100vw"
+        alt={`Portrait of ${site.name}`}
+        loading="eager"
+        fetchpriority="high"
+        pictureAttributes={{ class: "block h-full w-full" }}
+        class="h-full w-full object-cover object-[50%_25%]"
+      />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" aria-hidden="true"></div>
+
+    <div class="absolute inset-x-0 top-0">
+      <div class={`${container} pt-6`}><ProtoBar current="b" name="Cover" onDark /></div>
+    </div>
+
+    <div class="absolute inset-x-0 bottom-0">
+      <div class={`${container} pb-10 sm:pb-14`}>
+        <h1 class="text-4xl sm:text-6xl font-semibold tracking-[-0.025em] leading-[1]">{site.name}</h1>
+        <p class="mt-4 text-base sm:text-lg text-white/85">
+          {site.jobTitle} at {site.employer}
+        </p>
+        <p class="mt-1.5 max-w-[46ch] text-sm sm:text-base leading-[1.5] text-white/65">{site.tagline}</p>
+
+        <ul class="mt-6 flex flex-wrap gap-2 text-sm">
+          {
+            links.map((l) => (
+              <li>
+                <a
+                  href={l.href}
+                  target={l.external ? "_blank" : undefined}
+                  rel={l.external ? "me noopener noreferrer" : undefined}
+                  class="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm transition-colors hover:bg-white/20 hover:border-white/40"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class={`${container} [&>section:first-child]:border-t-0 [&>section:first-child]:mt-12 [&>section:first-child]:pt-0`}>
+    <About />
+    <SelectedWork />
+    <RecognitionService />
+    <Events />
+    <Media />
+    <Publications />
+  </main>
+</Layout>
+
+<style>
+  /* Extends the photograph's studio backdrop across the band (sampled from the image's left edge, top to bottom). */
+  .cover {
+    background: linear-gradient(180deg, #555659 0%, #7a7a7c 25%, #7e7e80 50%, #666666 75%, #404040 100%);
+  }
+  @media (min-width: 640px) {
+    .cover-photo {
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 45%);
+    }
+  }
+</style>

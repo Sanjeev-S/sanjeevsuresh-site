@@ -1,0 +1,130 @@
+---
+import "@fontsource/newsreader/latin-400.css";
+import "@fontsource/newsreader/latin-500.css";
+import "@fontsource/newsreader/latin-400-italic.css";
+import { Picture } from "astro:assets";
+import Layout from "../../../layouts/Layout.astro";
+import About from "../../../components/About.astro";
+import SelectedWork from "../../../components/SelectedWork.astro";
+import RecognitionService from "../../../components/RecognitionService.astro";
+import Events from "../../../components/Events.astro";
+import Media from "../../../components/Media.astro";
+import Publications from "../../../components/Publications.astro";
+import ProtoBar from "./_ProtoBar.astro";
+import portrait from "../../../assets/portrait.jpg";
+import { site } from "../../../data/site";
+
+const links = [
+  { label: "Email", href: `mailto:${site.email}`, external: false },
+  { label: "LinkedIn", href: site.links.linkedin, external: true },
+  { label: "GitHub", href: site.links.github, external: true },
+];
+---
+
+<Layout title="Prototype A · Editorial · Sanjeev Suresh" description="Portrait prototype A: editorial.">
+  <div class="editorial">
+    <div class="pt-6"><ProtoBar current="a" name="Editorial" /></div>
+
+    <section class="pt-14 sm:pt-20">
+      <div class="grid gap-10 sm:grid-cols-[1fr_auto] sm:items-end sm:gap-14">
+        <div class="min-w-0">
+          <p class="text-xs uppercase tracking-[0.18em] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            {site.jobTitle} · {site.employer}
+          </p>
+          <h1 class="serif mt-4 text-5xl sm:text-6xl font-normal leading-[0.95] tracking-[-0.02em] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+            {site.name}
+          </h1>
+          <p class="serif italic mt-6 max-w-[26ch] text-xl sm:text-2xl leading-[1.3] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+            {site.tagline}
+          </p>
+
+          <ul class="mt-8 flex flex-wrap gap-x-7 gap-y-2 text-sm">
+            {
+              links.map((l) => (
+                <li>
+                  <a
+                    href={l.href}
+                    target={l.external ? "_blank" : undefined}
+                    rel={l.external ? "me noopener noreferrer" : undefined}
+                    class="group inline-flex items-baseline gap-1 underline underline-offset-[6px] decoration-[var(--color-border)] dark:decoration-[var(--color-border-dark)] hover:decoration-current transition-colors"
+                  >
+                    {l.label}
+                    <span aria-hidden="true" class="text-xs text-[var(--color-muted)] dark:text-[var(--color-muted-dark)] group-hover:text-current transition-colors">
+                      ↗
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <Picture
+          src={portrait}
+          formats={["avif", "webp"]}
+          widths={[240, 360, 480, 600]}
+          sizes="(min-width: 640px) 260px, 200px"
+          alt={`Portrait of ${site.name}`}
+          loading="eager"
+          fetchpriority="high"
+          pictureAttributes={{ class: "order-first sm:order-none" }}
+          class="w-[200px] sm:w-[260px] h-auto aspect-[3/4] object-cover rounded-[3px] shadow-[0_24px_48px_-24px_rgba(0,0,0,0.45)] ring-1 ring-black/5 dark:ring-white/10"
+        />
+      </div>
+    </section>
+
+    <About />
+    <SelectedWork />
+    <RecognitionService />
+    <Events />
+    <Media />
+    <Publications />
+  </div>
+</Layout>
+
+<style is:global>
+  /* Editorial palette: warm paper in light mode, warm charcoal in dark mode. */
+  html:root {
+    --color-bg: #faf8f4;
+    --color-fg: #1a1816;
+    --color-muted: #6b665e;
+    --color-border: #e4dfd6;
+    --color-card: #f1ede6;
+    --color-accent: #1d4ed8;
+    --color-bg-dark: #121110;
+    --color-fg-dark: #efeae2;
+    --color-muted-dark: #9f988d;
+    --color-border-dark: #2a2724;
+    --color-card-dark: #1b1917;
+    --color-accent-dark: #93c5fd;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+  }
+  @media (prefers-color-scheme: dark) {
+    html:root {
+      background-color: var(--color-bg-dark);
+      color: var(--color-fg-dark);
+    }
+  }
+</style>
+
+<style>
+  .editorial {
+    --font-serif-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  }
+  .editorial .serif {
+    font-family: var(--font-serif-display);
+    font-feature-settings: "liga", "kern";
+  }
+  /* Section headings pick up the serif display face. */
+  .editorial :global(section h2) {
+    font-family: var(--font-serif-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .editorial :global(section h3) {
+    font-weight: 500;
+  }
+</style>
