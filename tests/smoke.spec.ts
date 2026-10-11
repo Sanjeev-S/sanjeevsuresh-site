@@ -45,6 +45,21 @@ test.describe("homepage smoke", () => {
     expect(overflow).toBeLessThanOrEqual(0);
   });
 
+  test("portrait studies render the photograph without sideways scroll", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+
+    for (const path of ["/portraits", "/portraits/print", "/portraits/studio", "/portraits/plate"]) {
+      const response = await page.goto(path);
+      expect(response?.ok(), path).toBeTruthy();
+      await expect(page.locator("h1"), path).toHaveCount(1);
+      await expect(page.locator('img[alt="Portrait of Sanjeev Suresh"]'), path).toHaveCount(1);
+      const overflow = await page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      );
+      expect(overflow, path).toBeLessThanOrEqual(0);
+    }
+  });
+
   test("dark mode applies via prefers-color-scheme", async ({ page }) => {
     await page.emulateMedia({ colorScheme: "dark" });
     await page.goto("/");

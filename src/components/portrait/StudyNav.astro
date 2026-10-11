@@ -1,0 +1,44 @@
+---
+interface Props {
+  current: "index" | "print" | "studio" | "plate";
+}
+
+const { current } = Astro.props;
+
+const items = [
+  { id: "index", href: "/portraits", label: "Studies" },
+  { id: "print", href: "/portraits/print", label: "Print" },
+  { id: "studio", href: "/portraits/studio", label: "Studio" },
+  { id: "plate", href: "/portraits/plate", label: "Plate" },
+] as const;
+---
+
+<nav aria-label="Portrait studies">
+  <ol class="flex flex-wrap items-baseline gap-x-4 gap-y-1 text-sm">
+    {
+      items.map((item) => (
+        <li>
+          {item.id === current ? (
+            <span aria-current="page" class="text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+              {item.label}
+            </span>
+          ) : (
+            <a
+              href={item.href}
+              class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)] dark:text-[var(--color-muted-dark)] dark:hover:text-[var(--color-fg-dark)] dark:focus-visible:outline-[var(--color-accent-dark)]"
+            >
+              {item.label}
+            </a>
+          )}
+        </li>
+      ))
+    }
+    <li class="sm:ml-auto">
+      <a
+        href="/"
+        class="text-[var(--color-muted)] transition-colors hover:text-[var(--color-fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)] dark:text-[var(--color-muted-dark)] dark:hover:text-[var(--color-fg-dark)] dark:focus-visible:outline-[var(--color-accent-dark)]"
+        >Current site</a
+      >
+    </li>
+  </ol>
+</nav>

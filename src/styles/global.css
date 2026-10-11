@@ -2,6 +2,7 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", "Iowan Old Style", Palatino, Georgia, serif;
 
   --color-bg: #ffffff;
   --color-fg: #0a0a0a;
@@ -39,4 +40,44 @@ html {
 
 body {
   font-feature-settings: "ss01", "cv11";
+}
+
+/* Warm paper for the Print portrait study. Tokens inherit into the existing sections. */
+body.tone-paper {
+  min-height: 100vh;
+  background-color: #f3f0ea;
+  color: #1c1916;
+  --color-bg: #f3f0ea;
+  --color-fg: #1c1916;
+  --color-muted: #5c564c;
+  --color-border: #ddd4c4;
+  --color-card: #e8e2d6;
+  --color-accent: #1d4ed8;
+}
+
+html:has(body.tone-paper) {
+  background-color: #f3f0ea;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.tone-paper {
+    background-color: #12110f;
+    color: #f3f0ea;
+    --color-bg: #12110f;
+    --color-fg: #f3f0ea;
+    --color-muted: #c2baac;
+    --color-border: #322e28;
+    --color-card: #1c1a16;
+    --color-accent: #93c5fd;
+    --color-bg-dark: #12110f;
+    --color-fg-dark: #f3f0ea;
+    --color-muted-dark: #c2baac;
+    --color-border-dark: #322e28;
+    --color-card-dark: #1c1a16;
+    --color-accent-dark: #93c5fd;
+  }
+
+  html:has(body.tone-paper) {
+    background-color: #12110f;
+  }
 }

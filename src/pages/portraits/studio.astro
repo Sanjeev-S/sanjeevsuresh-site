@@ -1,0 +1,49 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import ContactLinks from "../../components/portrait/ContactLinks.astro";
+import Portrait from "../../components/portrait/Portrait.astro";
+import SiteSections from "../../components/portrait/SiteSections.astro";
+import StudyNav from "../../components/portrait/StudyNav.astro";
+import { site } from "../../data/site";
+---
+
+<Layout
+  title="Studio · Sanjeev Suresh"
+  description="Portrait study: the studio photograph at full height beside the writing."
+  frame="bleed"
+>
+  <div class="lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-start">
+    <div class="lg:sticky lg:top-0 lg:w-[min(46vw,calc(100dvh*0.75))]">
+      <Portrait width={1000} sizes="(min-width: 1024px) min(46vw, 75vh), 100vw" priority class="w-full" />
+    </div>
+
+    <div class="min-w-0 px-5 py-8 sm:px-10 lg:px-14 lg:py-10 xl:px-16">
+      <div class="mx-auto w-full max-w-xl">
+        <StudyNav current="studio" />
+
+        <header class="mt-10 lg:flex lg:min-h-[calc(100dvh-5.5rem)] lg:flex-col lg:justify-center">
+          <div>
+            <h1 class="text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{site.name}</h1>
+            <p class="mt-3 text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+              {site.jobTitle} at {site.employer}
+            </p>
+            <p
+              class="mt-5 max-w-md leading-[1.55] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+            >
+              {site.tagline}
+            </p>
+            <div class="mt-7">
+              <ContactLinks />
+            </div>
+          </div>
+        </header>
+
+        <SiteSections />
+        <div class="pb-16">
+          <Footer />
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

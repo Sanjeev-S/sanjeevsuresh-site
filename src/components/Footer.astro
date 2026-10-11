@@ -1,0 +1,23 @@
+---
+import { site } from "../data/site";
+---
+
+<footer
+  class="mt-20 pt-8 border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
+>
+  <p>
+    {site.name} · <a
+      href={`mailto:${site.email}`}
+      class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors"
+      >{site.email}</a
+    >
+  </p>
+  <p class="mt-1">
+    <a
+      href="https://github.com/Sanjeev-S/sanjeevsuresh-site"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors">Source</a
+    >
+  </p>
+</footer>

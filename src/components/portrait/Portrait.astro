@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import portrait from "../../assets/portrait.jpg";
+
+interface Props {
+  width: number;
+  sizes: string;
+  class?: string;
+  priority?: boolean;
+}
+
+const { width, sizes, class: className, priority = false } = Astro.props;
+const height = Math.round((width * 4) / 3);
+---
+
+<Image
+  src={portrait}
+  alt="Portrait of Sanjeev Suresh"
+  width={width}
+  height={height}
+  layout="constrained"
+  quality={80}
+  sizes={sizes}
+  priority={priority}
+  class:list={["block", className]}
+/>

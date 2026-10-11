@@ -1,0 +1,71 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Portrait from "../../components/portrait/Portrait.astro";
+import StudyNav from "../../components/portrait/StudyNav.astro";
+
+const studies = [
+  {
+    href: "/portraits/print",
+    title: "Print",
+    summary: "The photograph sits beside the name, on warm paper, with a serif title.",
+  },
+  {
+    href: "/portraits/studio",
+    title: "Studio",
+    summary: "The portrait holds the left side of the screen at full height.",
+  },
+  {
+    href: "/portraits/plate",
+    title: "Plate",
+    summary: "The current column, with the circle replaced by a mounted photograph.",
+  },
+];
+---
+
+<Layout
+  title="Portrait studies · Sanjeev Suresh"
+  description="Three ways to place a studio portrait on Sanjeev Suresh's site."
+>
+  <div class="pt-8 sm:pt-10">
+    <StudyNav current="index" />
+  </div>
+
+  <section class="pt-12 sm:pt-16">
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight">Portrait studies</h1>
+
+    <div class="mt-8 grid gap-8 sm:grid-cols-[9.5rem_minmax(0,1fr)] sm:gap-10 sm:items-start">
+      <Portrait
+        width={304}
+        sizes="152px"
+        priority
+        class="w-full max-w-[9.5rem] border border-black/10 dark:border-white/15"
+      />
+      <div>
+        <p class="leading-[1.55] text-[var(--color-fg)] dark:text-[var(--color-fg-dark)]">
+          The studio portrait is built around the pose and the jacket, not only the face. The circle on the current
+          site crops that away. These three pages keep the same writing and change the placement.
+        </p>
+
+        <ul class="mt-8 border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)]">
+          {
+            studies.map((study) => (
+              <li class="border-b border-[var(--color-border)] py-5 dark:border-[var(--color-border-dark)]">
+                <h2 class="text-base font-semibold tracking-tight">
+                  <a
+                    href={study.href}
+                    class="underline decoration-transparent underline-offset-4 transition-colors hover:decoration-[var(--color-fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)] dark:hover:decoration-[var(--color-fg-dark)] dark:focus-visible:outline-[var(--color-accent-dark)]"
+                  >
+                    {study.title}
+                  </a>
+                </h2>
+                <p class="mt-1 text-sm leading-[1.55] text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]">
+                  {study.summary}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

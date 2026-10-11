@@ -5,14 +5,17 @@ import "@fontsource/inter/latin-600.css";
 import "@fontsource/inter/latin-700.css";
 import "../styles/global.css";
 
+import Footer from "../components/Footer.astro";
 import { site } from "../data/site";
 
 export type Props = {
   title?: string;
   description?: string;
+  tone?: "default" | "paper";
+  frame?: "column" | "bleed";
 };
 
-const { title, description } = Astro.props;
+const { title, description, tone = "default", frame = "column" } = Astro.props;
 const pageTitle = title ?? site.name;
 const pageDescription = description ?? site.description;
 const canonical = new URL(Astro.url.pathname, site.url).toString();
@@ -59,28 +62,16 @@ const personSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} is:inline></script>
   </head>
-  <body class="antialiased">
-    <div class="mx-auto max-w-[760px] px-5 sm:px-6 pb-24">
-      <slot />
-
-      <footer
-        class="mt-20 pt-8 border-t border-[var(--color-border)] dark:border-[var(--color-border-dark)] text-sm text-[var(--color-muted)] dark:text-[var(--color-muted-dark)]"
-      >
-        <p>
-          {site.name} · <a
-            href={`mailto:${site.email}`}
-            class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors">{site.email}</a
-          >
-        </p>
-        <p class="mt-1">
-          <a
-            href="https://github.com/Sanjeev-S/sanjeevsuresh-site"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hover:text-[var(--color-accent)] dark:hover:text-[var(--color-accent-dark)] transition-colors">Source</a
-          >
-        </p>
-      </footer>
-    </div>
+  <body class:list={["antialiased", tone === "paper" && "tone-paper"]}>
+    {
+      frame === "bleed" ? (
+        <slot />
+      ) : (
+        <div class="mx-auto max-w-[760px] px-5 pb-24 sm:px-6">
+          <slot />
+          <Footer />
+        </div>
+      )
+    }
   </body>
 </html>

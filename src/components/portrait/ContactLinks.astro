@@ -1,0 +1,25 @@
+---
+import { site } from "../../data/site";
+
+const links = [
+  { href: `mailto:${site.email}`, label: "Email" },
+  { href: site.links.linkedin, label: "LinkedIn", external: true },
+  { href: site.links.github, label: "GitHub", external: true },
+];
+---
+
+<ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+  {
+    links.map((link) => (
+      <li>
+        <a
+          href={link.href}
+          class="underline decoration-[var(--color-border)] underline-offset-[5px] transition-colors hover:decoration-[var(--color-fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-accent)] dark:decoration-[var(--color-border-dark)] dark:hover:decoration-[var(--color-fg-dark)] dark:focus-visible:outline-[var(--color-accent-dark)]"
+          {...(link.external ? { target: "_blank", rel: "me noopener noreferrer" } : {})}
+        >
+          {link.label}
+        </a>
+      </li>
+    ))
+  }
+</ul>
