@@ -18,6 +18,18 @@ export const service: ServiceEntry[] = [
   {
     year: 2026,
     role: "Program Committee",
+    organization: "Who Verifies the Agents? Workshop @ NeurIPS 2026",
+    url: "https://verify-agents-workshop.github.io/",
+  },
+  {
+    year: 2026,
+    role: "Program Committee",
+    organization: "JUDGe Workshop @ NeurIPS 2026",
+    url: "https://judge2026.github.io/",
+  },
+  {
+    year: 2026,
+    role: "Program Committee",
     organization: "RecSys 2026, Industry Track",
     url: "https://recsys.acm.org/recsys26/",
   },

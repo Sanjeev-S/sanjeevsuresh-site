@@ -5,8 +5,14 @@ export type EventEntry = {
   url: string;
 };
 
-// Most recent first. Community events (Luma Hosted By).
+// Most recent first. Community events I've hosted.
 export const events: EventEntry[] = [
+  {
+    month: "Oct",
+    year: 2026,
+    title: "Accuracy & Reliability of AI Agents: Virtual Summit",
+    url: "https://home.mlops.community/home/events/accuracy-and-reliability-of-ai-agents-virtual-summit-77nje0s530",
+  },
   {
     month: "Aug",
     year: 2026,

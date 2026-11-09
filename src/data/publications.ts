@@ -10,6 +10,14 @@ export type Publication = {
 export const publications: Publication[] = [
   {
     year: 2026,
+    title:
+      "When the Label Ignores the Request: Auditing Policy-Selected Targets in Synthetic Conversational Music Recommendation",
+    authors: "Suresh, S.",
+    venue: "RecSys Challenge 2026 Workshop @ ACM RecSys 2026",
+    url: "https://arxiv.org/abs/2609.39696",
+  },
+  {
+    year: 2026,
     title: "The State of Coding Agents (May 2026)",
     authors: "Suresh, S.",
     venue: "The Lemma (Substack)",

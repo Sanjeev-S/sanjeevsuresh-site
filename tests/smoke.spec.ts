@@ -29,17 +29,35 @@ test.describe("homepage smoke", () => {
     expect(asideM && mainM && asideM.y + asideM.height <= mainM.y).toBeTruthy();
   });
 
-  test("publication list has 6 entries", async ({ page }) => {
+  test("publication list has 7 entries, newest first", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("#publications ul > li")).toHaveCount(6);
+    const items = page.locator("#publications ul > li");
+    await expect(items).toHaveCount(7);
+    await expect(items.first()).toContainText("When the Label Ignores the Request");
+    await expect(items.first().locator("a")).toHaveAttribute("href", "https://arxiv.org/abs/2609.39696");
   });
 
-  test("events list has 2 linked entries", async ({ page }) => {
+  test("events list has 3 linked entries", async ({ page }) => {
     await page.goto("/");
     const items = page.locator("#events ul > li");
-    await expect(items).toHaveCount(2);
-    await expect(items.first()).toContainText("Enterprise MCP Lightning Talks");
-    await expect(items.first().locator("a")).toHaveAttribute("href", "https://luma.com/w3ckeuj7");
+    await expect(items).toHaveCount(3);
+    await expect(items.first()).toContainText("Accuracy & Reliability of AI Agents: Virtual Summit");
+    await expect(items.first().locator("a")).toHaveAttribute(
+      "href",
+      "https://home.mlops.community/home/events/accuracy-and-reliability-of-ai-agents-virtual-summit-77nje0s530",
+    );
+  });
+
+  test("service list includes NeurIPS 2026 workshop program committees", async ({ page }) => {
+    await page.goto("/");
+    const items = page.locator("#service ul > li");
+    await expect(items).toHaveCount(5);
+    await expect(page.locator('#service a[href="https://verify-agents-workshop.github.io/"]')).toContainText(
+      "Program Committee — Who Verifies the Agents? Workshop @ NeurIPS 2026",
+    );
+    await expect(page.locator('#service a[href="https://judge2026.github.io/"]')).toContainText(
+      "Program Committee — JUDGe Workshop @ NeurIPS 2026",
+    );
   });
 
   test("head has canonical, og:title, og:image, and schema.org Person", async ({ page }) => {
