@@ -42,6 +42,18 @@ test.describe("homepage smoke", () => {
     await expect(items.first().locator("a")).toHaveAttribute("href", "https://luma.com/w3ckeuj7");
   });
 
+  test("service list includes NeurIPS 2026 workshop program committees", async ({ page }) => {
+    await page.goto("/");
+    const items = page.locator("#service ul > li");
+    await expect(items).toHaveCount(5);
+    await expect(page.locator('#service a[href="https://verify-agents-workshop.github.io/"]')).toContainText(
+      "Program Committee — Who Verifies the Agents? Workshop @ NeurIPS 2026",
+    );
+    await expect(page.locator('#service a[href="https://judge2026.github.io/"]')).toContainText(
+      "Program Committee — JUDGe Workshop @ NeurIPS 2026",
+    );
+  });
+
   test("head has canonical, og:title, og:image, and schema.org Person", async ({ page }) => {
     const response = await page.goto("/");
     expect(response?.ok()).toBeTruthy();
