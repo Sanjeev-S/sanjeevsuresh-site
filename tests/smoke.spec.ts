@@ -34,12 +34,15 @@ test.describe("homepage smoke", () => {
     await expect(page.locator("#publications ul > li")).toHaveCount(6);
   });
 
-  test("events list has 2 linked entries", async ({ page }) => {
+  test("events list has 3 linked entries", async ({ page }) => {
     await page.goto("/");
     const items = page.locator("#events ul > li");
-    await expect(items).toHaveCount(2);
-    await expect(items.first()).toContainText("Enterprise MCP Lightning Talks");
-    await expect(items.first().locator("a")).toHaveAttribute("href", "https://luma.com/w3ckeuj7");
+    await expect(items).toHaveCount(3);
+    await expect(items.first()).toContainText("Accuracy & Reliability of AI Agents: Virtual Summit");
+    await expect(items.first().locator("a")).toHaveAttribute(
+      "href",
+      "https://home.mlops.community/home/events/accuracy-and-reliability-of-ai-agents-virtual-summit-77nje0s530",
+    );
   });
 
   test("service list includes NeurIPS 2026 workshop program committees", async ({ page }) => {
