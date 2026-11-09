@@ -29,9 +29,12 @@ test.describe("homepage smoke", () => {
     expect(asideM && mainM && asideM.y + asideM.height <= mainM.y).toBeTruthy();
   });
 
-  test("publication list has 6 entries", async ({ page }) => {
+  test("publication list has 7 entries, newest first", async ({ page }) => {
     await page.goto("/");
-    await expect(page.locator("#publications ul > li")).toHaveCount(6);
+    const items = page.locator("#publications ul > li");
+    await expect(items).toHaveCount(7);
+    await expect(items.first()).toContainText("When the Label Ignores the Request");
+    await expect(items.first().locator("a")).toHaveAttribute("href", "https://arxiv.org/abs/2609.39696");
   });
 
   test("events list has 3 linked entries", async ({ page }) => {
